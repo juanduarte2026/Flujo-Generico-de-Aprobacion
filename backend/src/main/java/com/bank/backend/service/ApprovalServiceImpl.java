@@ -10,7 +10,6 @@ import com.bank.backend.enums.RequestStatus;
 import com.bank.backend.exception.InvalidRequestException;
 import com.bank.backend.exception.ResourceNotFoundException;
 import com.bank.backend.mapper.ApprovalMapper;
-import com.bank.backend.repository.ApprovalHistoryRepository;
 import com.bank.backend.repository.ApprovalRequestRepository;
 import com.bank.backend.repository.RequestTypeRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +28,6 @@ public class ApprovalServiceImpl implements ApprovalService {
 
     private final ApprovalRequestRepository requestRepository;
     private final RequestTypeRepository requestTypeRepository;
-    private final ApprovalHistoryRepository historyRepository;
     private final ApprovalMapper mapper;
     private final NotificationService notificationService;
 

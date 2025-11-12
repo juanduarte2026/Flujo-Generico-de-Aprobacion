@@ -28,6 +28,7 @@ public class RequestType {
     @Column(columnDefinition = "TEXT")
     private String description;
 
+    @Builder.Default
     @Column(name = "is_active")
     private Boolean isActive = true;
 }

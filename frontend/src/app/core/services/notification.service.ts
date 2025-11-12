@@ -20,7 +20,7 @@ export class NotificationService {
     this.showNotification(message, 'info');
   }
 
-   // Sistema simple de notificaciones (sin librería externa)
+   // Sistema simple de notificaciones 
   private showNotification(message: string, type: 'success' | 'error' | 'info'): void {
     
     // Crear elemento de notificación

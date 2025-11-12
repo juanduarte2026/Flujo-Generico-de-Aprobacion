@@ -66,7 +66,7 @@ export class AuthService {
   }
 
 
-   // Recupera usuario de localStorage (solo si estamos en navegador)
+   // Recupera usuario de localStorage (solo si en navegador)
   private getUserFromStorage(): User | null {
     if (typeof window === 'undefined') return null; 
     const userJson = localStorage.getItem('currentUser');

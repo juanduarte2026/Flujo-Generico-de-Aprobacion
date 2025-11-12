@@ -1,0 +1,150 @@
+<div class="container">
+
+  <div class="header">
+    <h1>Nueva Solicitud de Aprobación</h1>
+    <p>Completa el formulario para crear una nueva solicitud</p>
+  </div>
+
+
+  <div *ngIf="!loading" class="form-container">
+    <form [formGroup]="requestForm" (ngSubmit)="onSubmit()">
+      
+
+      <div class="form-group">
+        <label for="title">
+          Título de la Solicitud *
+        </label>
+        <input 
+          id="title"
+          type="text" 
+          formControlName="title"
+          placeholder="Ej: Despliegue de microservicio Payment v2.1.0"
+          class="form-input"
+          [class.error]="title?.invalid && title?.touched"
+        />
+        <span class="error-message" *ngIf="title?.invalid && title?.touched">
+          <span class="error-icon">⚠️</span>
+          El título es requerido (mínimo 5 caracteres)
+        </span>
+        <span class="help-text" *ngIf="!title?.touched">
+          Ingresa un título descriptivo que identifique claramente la solicitud
+        </span>
+      </div>
+
+
+      <div class="form-group">
+        <label for="requestTypeId">
+          Tipo de Solicitud *
+        </label>
+        <select 
+          id="requestTypeId"
+          formControlName="requestTypeId"
+          class="form-select"
+          [class.error]="requestTypeId?.invalid && requestTypeId?.touched"
+        >
+          <option value="">-- Selecciona un tipo --</option>
+          <option *ngFor="let type of requestTypes" [value]="type.id">
+            {{ type.name }} - {{ type.description }}
+          </option>
+        </select>
+        <span class="error-message" *ngIf="requestTypeId?.invalid && requestTypeId?.touched">
+          <span class="error-icon">⚠️</span>
+          El tipo de solicitud es requerido
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="approver">
+          Aprobador *
+        </label>
+        <select 
+          id="approver"
+          formControlName="approver"
+          class="form-select"
+          [class.error]="approver?.invalid && approver?.touched"
+        >
+          <option value="">-- Selecciona un aprobador --</option>
+          <option *ngFor="let user of users" [value]="user.username">
+            {{ user.fullName }} - {{ user.department }}
+          </option>
+        </select>
+        <span class="error-message" *ngIf="approver?.invalid && approver?.touched">
+          <span class="error-icon">⚠️</span>
+          El aprobador es requerido
+        </span>
+        <span class="help-text" *ngIf="!approver?.touched">
+          Selecciona la persona que debe aprobar esta solicitud
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="description">
+          Descripción Detallada *
+        </label>
+        <textarea 
+          id="description"
+          formControlName="description"
+          placeholder="Describe detalladamente la solicitud, incluyendo contexto, impacto y cualquier información relevante..."
+          rows="6"
+          class="form-textarea"
+          [class.error]="description?.invalid && description?.touched"
+        ></textarea>
+        <div class="textarea-footer">
+          <span class="error-message" *ngIf="description?.invalid && description?.touched">
+            <span class="error-icon">⚠️</span>
+            La descripción es requerida (mínimo 10 caracteres)
+          </span>
+          <span class="char-count" *ngIf="description?.value">
+            {{ description?.value.length }} caracteres
+          </span>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <div class="info-content">
+          <strong>Solicitante:</strong> {{ currentUser?.fullName }}
+          <span class="info-detail">{{ currentUser?.username }} - {{ currentUser?.department }}</span>
+        </div>
+      </div>
+
+
+      <div class="form-actions">
+        <button 
+          type="button" 
+          class="btn-secondary"
+          routerLink="/dashboard"
+          [disabled]="submitting"
+        >
+          <span class="btn-icon">←</span>
+          Cancelar
+        </button>
+        <button 
+          type="submit" 
+          class="btn-primary"
+          [disabled]="submitting || requestForm.invalid"
+        >
+          <span *ngIf="!submitting">
+            Crear Solicitud
+          </span>
+          <span *ngIf="submitting">
+            <span class="btn-icon spinning">⏳</span>
+            Creando...
+          </span>
+        </button>
+      </div>
+
+      <div class="validation-summary" *ngIf="requestForm.touched && requestForm.invalid">
+        <div class="validation-header">
+          <span class="validation-icon">⚠️</span>
+          <strong>Por favor completa los campos requeridos:</strong>
+        </div>
+        <ul>
+          <li *ngIf="title?.invalid && title?.touched">Título válido</li>
+          <li *ngIf="requestTypeId?.invalid && requestTypeId?.touched">Tipo de solicitud</li>
+          <li *ngIf="approver?.invalid && approver?.touched">Aprobador</li>
+          <li *ngIf="description?.invalid && description?.touched">Descripción detallada</li>
+        </ul>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,192 @@
+<div class="container">
+  <div class="header">
+    <div class="header-content">
+      <h1>Detalle de Solicitud</h1>
+      <p class="request-id">ID: <code>{{ request?.id }}</code></p>
+    </div>
+    <button class="btn-back" routerLink="/dashboard">
+      <span class="btn-icon">←</span>
+      Volver
+    </button>
+  </div>
+
+
+  <div *ngIf="!loading && request" class="detail-container">
+    
+    <div class="main-card">
+      <div class="card-header">
+        <h2>{{ request.title }}</h2>
+        <app-status-badge [status]="request.status"></app-status-badge>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-item">
+          <div class="info-label">
+            Tipo de Solicitud
+          </div>
+          <div class="info-value">
+            <strong>{{ request.requestType.name }}</strong>
+            <span class="info-subtitle">{{ request.requestType.description }}</span>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-label">
+            Solicitante
+          </div>
+          <div class="info-value">
+            <strong>{{ request.requesterFullName }}</strong>
+            <span class="info-subtitle">{{ request.requester }}</span>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-label">
+            Aprobador
+          </div>
+          <div class="info-value">
+            <strong>{{ request.approverFullName }}</strong>
+            <span class="info-subtitle">{{ request.approver }}</span>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-label">
+            Fecha de Creación
+          </div>
+          <div class="info-value">
+            <strong>{{ request.createdAt | date:'dd/MM/yyyy' }}</strong>
+            <span class="info-subtitle">{{ request.createdAt | date:'HH:mm:ss' }}</span>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-label">
+            Última Actualización
+          </div>
+          <div class="info-value">
+            <strong>{{ request.updatedAt | date:'dd/MM/yyyy' }}</strong>
+            <span class="info-subtitle">{{ request.updatedAt | date:'HH:mm:ss' }}</span>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-label">
+            Estado Actual
+          </div>
+          <div class="info-value">
+            <span *ngIf="request.status === 'PENDING'" class="status-text pending">
+              Pendiente de Aprobación
+            </span>
+            <span *ngIf="request.status === 'APPROVED'" class="status-text approved">
+              Aprobada
+            </span>
+            <span *ngIf="request.status === 'REJECTED'" class="status-text rejected">
+              Rechazada
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="description-section">
+        <div class="section-label">
+          <h3>Descripción Detallada</h3>
+        </div>
+        <div class="description-content">
+          <p>{{ request.description }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="canApprove" class="action-card">
+      <div class="action-header">
+        <div class="action-title">
+          <h3>Acción Requerida</h3>
+          <p>Como aprobador, debes revisar y decidir sobre esta solicitud</p>
+        </div>
+      </div>
+
+      <form [formGroup]="actionForm" class="action-form">
+        <div class="form-group">
+          <label for="comment">
+            Comentario o Justificación *
+          </label>
+          <textarea 
+            id="comment"
+            formControlName="comment"
+            placeholder="Ingresa tu comentario o justificación de la decisión. Este comentario será visible para el solicitante y quedará registrado en el historial..."
+            rows="5"
+            class="form-textarea"
+            [class.error]="comment?.invalid && comment?.touched"
+          ></textarea>
+          <div class="textarea-footer">
+            <span class="error-message" *ngIf="comment?.invalid && comment?.touched">
+              <span class="error-icon">⚠️</span>
+              El comentario es requerido (mínimo 10 caracteres)
+            </span>
+            <span class="char-count" *ngIf="comment?.value">
+              {{ comment?.value.length }} caracteres
+            </span>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <button 
+            type="button"
+            class="btn-approve"
+            (click)="approveRequest()"
+            [disabled]="processing || actionForm.invalid"
+          >
+            <span *ngIf="!processing">
+              Aprobar Solicitud
+            </span>
+            <span *ngIf="processing">
+              <span class="btn-icon spinning">⏳</span>
+              Procesando...
+            </span>
+          </button>
+          
+          <button 
+            type="button"
+            class="btn-reject"
+            (click)="rejectRequest()"
+            [disabled]="processing || actionForm.invalid"
+          >
+            <span *ngIf="!processing">
+              Rechazar Solicitud
+            </span>
+            <span *ngIf="processing">
+              <span class="btn-icon spinning">⏳</span>
+              Procesando...
+            </span>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div *ngIf="!canApprove && request.status !== 'PENDING'" class="info-card">
+      <div class="info-card-icon">
+        <span *ngIf="request.status === 'APPROVED'"></span>
+        <span *ngIf="request.status === 'REJECTED'"></span>
+      </div>
+      <div class="info-card-content">
+        <h4>Esta solicitud ya fue procesada</h4>
+        <p>
+          Estado final: 
+          <strong>{{ request.status === 'APPROVED' ? 'Aprobada' : 'Rechazada' }}</strong>
+        </p>
+        <p class="info-card-date">
+          Última actualización: {{ request.updatedAt | date:'dd/MM/yyyy HH:mm' }}
+        </p>
+      </div>
+    </div>
+
+    <!-- MENSAJE SI NO ES EL APROBADOR -->
+    <div *ngIf="!canApprove && request.status === 'PENDING'" class="warning-card">
+      <div class="warning-content">
+        <h4>No puedes actuar sobre esta solicitud</h4>
+        <p>Solo el aprobador asignado ({{ request.approverFullName }}) puede aprobar o rechazar esta solicitud.</p>
+      </div>
+    </div>
+  </div>
+</div>

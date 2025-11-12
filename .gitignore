@@ -1,0 +1,156 @@
+# ===================================================================
+# FRONTEND (Angular)
+# ===================================================================
+
+# Dependencias de Node
+frontend/node_modules/
+frontend/npm-debug.log
+frontend/yarn-error.log
+frontend/package-lock.json
+frontend/yarn.lock
+
+# Archivos de compilación de Angular
+frontend/dist/
+frontend/tmp/
+frontend/out-tsc/
+frontend/.angular/
+frontend/.sass-cache/
+
+# Archivos de IDEs y editores
+frontend/.idea/
+frontend/.vscode/
+frontend/*.swp
+frontend/*.swo
+frontend/*~
+frontend/.DS_Store
+
+# Archivos de testing
+frontend/coverage/
+frontend/.nyc_output/
+
+# Archivos de configuración del entorno (NO subir a producción)
+frontend/src/environments/environment.prod.ts
+frontend/src/environments/environment.local.ts
+
+# ===================================================================
+# BACKEND (Spring Boot)
+# ===================================================================
+
+# Maven
+backend/target/
+backend/pom.xml.tag
+backend/pom.xml.releaseBackup
+backend/pom.xml.versionsBackup
+backend/pom.xml.next
+backend/release.properties
+backend/dependency-reduced-pom.xml
+backend/buildNumber.properties
+backend/.mvn/timing.properties
+backend/.mvn/wrapper/maven-wrapper.jar
+
+# Gradle
+backend/.gradle/
+backend/build/
+
+# Archivos de Spring Boot
+backend/*.log
+backend/logs/
+backend/application-local.properties
+backend/application-local.yml
+
+# IDEs
+backend/.idea/
+backend/.vscode/
+backend/*.iml
+backend/*.ipr
+backend/*.iws
+backend/.project
+backend/.classpath
+backend/.settings/
+backend/bin/
+
+# ===================================================================
+# DOCKER
+# ===================================================================
+
+# Volúmenes de Docker
+postgres_data/
+docker-compose.override.yml
+
+# ===================================================================
+# SEGURIDAD (IMPORTANTE)
+# ===================================================================
+
+# Credenciales y secrets
+.env
+.env.local
+.env.production
+*.key
+*.pem
+*.p12
+*.jks
+*-key.json
+credentials.json
+secrets.yml
+secrets.json
+
+# Configuraciones sensibles
+**/application-secret.yml
+**/application-secret.properties
+**/database.properties
+**/datasource.properties
+
+# Tokens y API Keys
+**/*token*
+**/*apikey*
+**/*secret*
+**/*password*
+
+# ===================================================================
+# SISTEMA OPERATIVO
+# ===================================================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.directory
+.Trash-*
+
+# ===================================================================
+# OTROS
+# ===================================================================
+
+# Backups
+*.bak
+*.backup
+*.old
+*.orig
+
+# Archivos temporales
+*.tmp
+*.temp
+.cache/
+
+# Logs generales
+*.log
+logs/
+
+# Archivos de prueba locales
+test-data/
+temp/
+scratch/
+
+# Documentación generada
+docs/generated/
+site/

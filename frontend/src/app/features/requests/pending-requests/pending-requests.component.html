@@ -1,0 +1,79 @@
+<div class="container">
+  <div class="header">
+    <div class="header-content">
+      <h1>Solicitudes Pendientes</h1>
+      <p>Solicitudes esperando tu aprobación</p>
+    </div>
+    <div class="pending-badge" *ngIf="requests.length > 0">
+      {{ requests.length }} pendiente{{ requests.length !== 1 ? 's' : '' }}
+    </div>
+  </div>
+
+
+  <div *ngIf="!loading && requests.length === 0" class="empty-state">
+    <h3>¡Todo al día!</h3>
+    <p>No tienes solicitudes pendientes de aprobación</p>
+    <a routerLink="/dashboard" class="btn-secondary">
+      <span class="btn-icon">←</span>
+      Volver al Dashboard
+    </a>
+  </div>
+
+
+  <div *ngIf="!loading && requests.length > 0" class="requests-list">
+    <div *ngFor="let request of requests" class="request-item">
+      
+      <div class="request-content">
+        <div class="request-header">
+          <h3>{{ request.title }}</h3>
+          <span class="priority-badge">🔔 Requiere atención</span>
+        </div>
+        
+        <p class="description">{{ request.description }}</p>
+        
+        <div class="metadata">
+          <div class="metadata-row">
+            <div class="metadata-item">
+              <span class="metadata-label">Tipo:</span>
+              <strong>{{ request.requestType.name }}</strong>
+            </div>
+            
+            <div class="metadata-item">
+              <span class="metadata-label">Solicitante:</span>
+              <strong>{{ request.requesterFullName }}</strong>
+              <span class="metadata-subtitle">({{ request.requester}})</span>
+            </div>
+          </div>
+          
+          <div class="metadata-row">
+            <div class="metadata-item">
+              <span class="metadata-label">Fecha de solicitud:</span>
+              <strong>{{ request.createdAt | date:'dd/MM/yyyy' }}</strong>
+              <span class="metadata-subtitle">{{ request.createdAt | date:'HH:mm' }}</span>
+            </div>
+            
+            <div class="metadata-item">
+              <span class="metadata-label">Tiempo transcurrido:</span>
+              <strong>{{ getTimeElapsed(request.createdAt) }}</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="request-actions">
+        <app-status-badge [status]="request.status"></app-status-badge>
+        <a [routerLink]="['/requests/detail', request.id]" class="btn-review">
+          Revisar y Decidir
+          <span class="btn-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <div *ngIf="!loading && requests.length > 0" class="help-box">
+    <div class="help-content">
+      <strong>Recuerda:</strong>
+      <p>Al revisar cada solicitud podrás ver todos los detalles y decidir si aprobarla o rechazarla con un comentario justificativo.</p>
+    </div>
+  </div>
+</div>

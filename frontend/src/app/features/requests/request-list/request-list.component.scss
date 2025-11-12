@@ -1,0 +1,232 @@
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+  min-height: calc(100vh - 80px);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+
+  .header-content {
+    h1 {
+      font-size: 2rem;
+      color: #1f2937;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: #6b7280;
+      font-size: 1.125rem;
+    }
+  }
+
+  .btn-new {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 0.875rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+
+    .btn-icon {
+      font-size: 1.25rem;
+    }
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
+    }
+  }
+}
+
+// GRID DE TARJETAS
+.requests-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 1.5rem;
+}
+
+.request-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border-color: #667eea;
+  }
+}
+
+// HEADER DE LA TARJETA
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1.5rem;
+  gap: 1rem;
+  border-bottom: 1px solid #f3f4f6;
+
+  h3 {
+    color: #1f2937;
+    margin: 0;
+    flex: 1;
+    font-size: 1.25rem;
+    line-height: 1.4;
+  }
+}
+
+// CUERPO DE LA TARJETA
+.card-body {
+  padding: 1.5rem;
+
+  .description {
+    color: #6b7280;
+    margin: 0 0 1.25rem 0;
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 0.95rem;
+  }
+
+  .metadata {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .metadata-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #6b7280;
+    font-size: 0.875rem;
+
+    .metadata-icon {
+      font-size: 1.125rem;
+    }
+
+    .metadata-label {
+      color: #9ca3af;
+    }
+
+    strong {
+      color: #374151;
+    }
+  }
+}
+
+// FOOTER DE LA TARJETA
+.card-footer {
+  padding: 1rem 1.5rem;
+  background: #f9fafb;
+  border-top: 1px solid #f3f4f6;
+
+  .btn-view {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.5rem 0;
+    transition: all 0.3s ease;
+
+    .btn-icon {
+      font-size: 1.125rem;
+      transition: transform 0.3s ease;
+    }
+
+    &:hover {
+      color: #764ba2;
+
+      .btn-icon {
+        transform: scale(1.2);
+      }
+    }
+  }
+}
+
+// ESTADO VACÍO
+.empty-state {
+  background: white;
+  border-radius: 12px;
+  padding: 4rem 2rem;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+  .empty-icon {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.7;
+  }
+
+  h3 {
+    color: #1f2937;
+    margin-bottom: 0.75rem;
+    font-size: 1.75rem;
+  }
+
+  p {
+    color: #6b7280;
+    margin-bottom: 2rem;
+    font-size: 1.125rem;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 0.875rem 1.75rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+
+    .btn-icon {
+      font-size: 1.25rem;
+    }
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
+    }
+  }
+}
+
+// RESPONSIVE
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+
+    .btn-new {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  .requests-grid {
+    grid-template-columns: 1fr;
+  }
+}

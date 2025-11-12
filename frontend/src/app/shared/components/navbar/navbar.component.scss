@@ -1,0 +1,440 @@
+.navbar {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-container {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+// MARCA/LOGO
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: default;
+
+  .brand-logo {
+    font-size: 2.5rem;
+    animation: pulse 2s infinite;
+  }
+
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+
+    h1 {
+      margin: 0;
+      font-size: 1.375rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .brand-subtitle {
+      font-size: 0.75rem;
+      opacity: 0.9;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+// MENÚ DE NAVEGACIÓN
+.navbar-menu {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex: 1;
+  justify-content: center;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: white;
+  text-decoration: none;
+  padding: 0.75rem 1.25rem;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  position: relative;
+  white-space: nowrap;
+
+  .link-icon {
+    font-size: 1.25rem;
+  }
+
+  .link-text {
+    font-size: 0.95rem;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+  }
+
+  &.active {
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 3px;
+      background: white;
+      border-radius: 2px;
+    }
+  }
+
+  &.notification-link {
+    position: relative;
+  }
+}
+
+// BADGE DE NOTIFICACIONES
+.notification-badge {
+  background: #ef4444;
+  color: white;
+  border-radius: 12px;
+  padding: 2px 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  min-width: 20px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(239, 68, 68, 0.4);
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+// INFORMACIÓN DEL USUARIO
+.navbar-user {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  .user-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+  }
+
+  .user-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    .user-name {
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: -0.2px;
+    }
+
+    .user-department {
+      font-size: 0.8rem;
+      opacity: 0.9;
+      font-weight: 500;
+    }
+  }
+}
+
+// BOTÓN LOGOUT
+.btn-logout {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  padding: 0.625rem 1.25rem;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+
+  .logout-icon {
+    font-size: 1.25rem;
+  }
+
+  .logout-text {
+    font-size: 0.95rem;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+}
+
+// BOTÓN MENÚ MÓVIL
+.mobile-menu-btn {
+  display: none;
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  .menu-icon {
+    font-size: 1.5rem;
+    display: block;
+    transition: transform 0.3s ease;
+
+    &.active {
+      transform: rotate(90deg);
+    }
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+}
+
+// MENÚ MÓVIL
+.mobile-menu {
+  position: fixed;
+  top: 80px;
+  left: 0;
+  right: 0;
+  background: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+
+  &.open {
+    max-height: calc(100vh - 80px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .mobile-menu-content {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .mobile-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #374151;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+
+    .link-icon {
+      font-size: 1.5rem;
+    }
+
+    .link-text {
+      flex: 1;
+      font-size: 1rem;
+    }
+
+    &:hover {
+      background: #f3f4f6;
+    }
+
+    &.active {
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      color: #667eea;
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 4px;
+        height: 60%;
+        background: #667eea;
+        border-radius: 0 4px 4px 0;
+      }
+    }
+  }
+
+  .mobile-menu-divider {
+    height: 2px;
+    background: #f3f4f6;
+    margin: 1rem 0;
+  }
+
+  .mobile-user-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+
+    .user-avatar-large {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+
+    .user-details-mobile {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+
+      .user-name {
+        font-weight: 700;
+        color: #1f2937;
+        font-size: 1rem;
+      }
+
+      .user-email {
+        color: #6b7280;
+        font-size: 0.875rem;
+      }
+
+      .user-department {
+        color: #9ca3af;
+        font-size: 0.875rem;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .btn-logout-mobile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+
+    .logout-icon {
+      font-size: 1.5rem;
+    }
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+    }
+  }
+}
+
+// RESPONSIVE
+@media (max-width: 1024px) {
+  .navbar-menu {
+    display: none;
+  }
+
+  .navbar-user {
+    display: none;
+  }
+
+  .mobile-menu-btn {
+    display: block;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-container {
+    padding: 1rem;
+  }
+
+  .navbar-brand {
+    .brand-text {
+      h1 {
+        font-size: 1.125rem;
+      }
+
+      .brand-subtitle {
+        font-size: 0.7rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-brand {
+    gap: 0.5rem;
+
+    .brand-logo {
+      font-size: 2rem;
+    }
+
+    .brand-text {
+      h1 {
+        font-size: 1rem;
+      }
+
+      .brand-subtitle {
+        display: none;
+      }
+    }
+  }
+}

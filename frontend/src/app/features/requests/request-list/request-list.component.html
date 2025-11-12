@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="header">
+    <div class="header-content">
+      <h1>Mis Solicitudes</h1>
+      <p>Todas las solicitudes que has creado</p>
+    </div>
+    <a routerLink="/requests/create" class="btn-new">
+      Nueva Solicitud
+    </a>
+  </div>
+
+
+  <div *ngIf="!loading && requests.length === 0" class="empty-state">
+    <div class="empty-icon">📭</div>
+    <h3>No tienes solicitudes</h3>
+    <p>Comienza creando tu primera solicitud de aprobación</p>
+    <a routerLink="/requests/create" class="btn-primary">
+      Nueva Solicitud
+    </a>
+  </div>
+
+  <div *ngIf="!loading && requests.length > 0" class="requests-grid">
+    <div *ngFor="let request of requests" class="request-card">
+      <div class="card-header">
+        <h3>{{ request.title }}</h3>
+        <app-status-badge [status]="request.status"></app-status-badge>
+      </div>
+
+      <div class="card-body">
+        <p class="description">{{ request.description }}</p>
+        
+        <div class="metadata">
+          <div class="metadata-item">
+            <span class="metadata-label">Tipo:</span>
+            <strong>{{ request.requestType.name }}</strong>
+          </div>
+          
+          <div class="metadata-item">
+            <span class="metadata-label">Aprobador:</span>
+            <strong>{{ request.approverFullName }}</strong>
+          </div>
+          
+          <div class="metadata-item">
+            <span class="metadata-label">Creada:</span>
+            <strong>{{ request.createdAt | date:'dd/MM/yyyy HH:mm' }}</strong>
+          </div>
+
+          <div class="metadata-item" *ngIf="request.status !== 'PENDING'">
+            <span class="metadata-label">Actualizada:</span>
+            <strong>{{ request.updatedAt | date:'dd/MM/yyyy HH:mm' }}</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-footer">
+        <a [routerLink]="['/requests/detail', request.id]" class="btn-view">
+          Ver Detalle
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,133 @@
+<nav class="navbar">
+  <div class="navbar-container">
+    
+    <!-- LOGO Y MARCA -->
+    <div class="navbar-brand">
+      <div class="brand-text">
+        <h1>Sistema de Aprobaciones</h1>
+      </div>
+    </div>
+
+    <!-- MENÚ DE NAVEGACIÓN -->
+    <div class="navbar-menu" *ngIf="currentUser">
+      <a 
+        routerLink="/dashboard" 
+        routerLinkActive="active" 
+        [routerLinkActiveOptions]="{exact: false}"
+        class="nav-link"
+      >
+        <span class="link-text">Dashboard</span>
+      </a>
+
+      <a 
+        routerLink="/requests/create" 
+        routerLinkActive="active"
+        class="nav-link"
+      >
+        <span class="link-text">Nueva Solicitud</span>
+      </a>
+
+      <a 
+        routerLink="/requests/pending" 
+        routerLinkActive="active"
+        class="nav-link notification-link"
+      >
+        <span class="link-text">Pendientes</span>
+        <span class="notification-badge" *ngIf="pendingCount > 0">
+          {{ pendingCount }}
+        </span>
+      </a>
+
+      <a 
+        routerLink="/requests/list" 
+        routerLinkActive="active"
+        class="nav-link"
+      >
+        <span class="link-text">Mis Solicitudes</span>
+      </a>
+    </div>
+
+    <!-- INFORMACIÓN DEL USUARIO Y LOGOUT -->
+    <div class="navbar-user" *ngIf="currentUser">
+      <div class="user-info">
+        <div class="user-avatar">
+          {{ getInitials(currentUser.fullName) }}
+        </div>
+        <div class="user-details">
+          <span class="user-name">{{ currentUser.fullName }}</span>
+          <span class="user-department">{{ currentUser.department }}</span>
+        </div>
+      </div>
+      
+      <button class="btn-logout" (click)="logout()" title="Cerrar sesión">
+        <span class="logout-text">Salir</span>
+      </button>
+    </div>
+
+    <!-- BOTÓN MENÚ MÓVIL -->
+    <button class="mobile-menu-btn" (click)="toggleMobileMenu()" *ngIf="currentUser">
+      <span class="menu-icon" [class.active]="mobileMenuOpen">☰</span>
+    </button>
+  </div>
+
+  <!-- MENÚ MÓVIL -->
+  <div class="mobile-menu" [class.open]="mobileMenuOpen" *ngIf="currentUser">
+    <div class="mobile-menu-content">
+      <a 
+        routerLink="/dashboard" 
+        routerLinkActive="active"
+        class="mobile-nav-link"
+        (click)="closeMobileMenu()"
+      >
+        <span class="link-text">Dashboard</span>
+      </a>
+
+      <a 
+        routerLink="/requests/create" 
+        routerLinkActive="active"
+        class="mobile-nav-link"
+        (click)="closeMobileMenu()"
+      >
+        <span class="link-text">Nueva Solicitud</span>
+      </a>
+
+      <a 
+        routerLink="/requests/pending" 
+        routerLinkActive="active"
+        class="mobile-nav-link"
+        (click)="closeMobileMenu()"
+      >
+        <span class="link-text">Pendientes</span>
+        <span class="notification-badge" *ngIf="pendingCount > 0">
+          {{ pendingCount }}
+        </span>
+      </a>
+
+      <a 
+        routerLink="/requests/list" 
+        routerLinkActive="active"
+        class="mobile-nav-link"
+        (click)="closeMobileMenu()"
+      >
+        <span class="link-text">Mis Solicitudes</span>
+      </a>
+
+      <div class="mobile-menu-divider"></div>
+
+      <div class="mobile-user-info">
+        <div class="user-avatar-large">
+          {{ getInitials(currentUser.fullName) }}
+        </div>
+        <div class="user-details-mobile">
+          <span class="user-name">{{ currentUser.fullName }}</span>
+          <span class="user-email">{{ currentUser.email }}</span>
+          <span class="user-department">{{ currentUser.department }}</span>
+        </div>
+      </div>
+
+      <button class="btn-logout-mobile" (click)="logout()">
+        <span class="logout-text">Cerrar Sesión</span>
+      </button>
+    </div>
+  </div>
+</nav>

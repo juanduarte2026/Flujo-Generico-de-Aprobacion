@@ -1,0 +1,71 @@
+<div class="login-container">
+  <div class="login-card">
+
+    <div class="login-header">
+      <div class="logo">
+        <h1>Sistema de Aprobaciones</h1>
+      </div>
+      <p class="subtitle">PRUEBA TECNICA</p>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+      <div class="form-group">
+        <label for="username">
+          Usuario
+        </label>
+        <div class="input-wrapper">
+          <input 
+            id="username"
+            type="text" 
+            formControlName="username"
+            placeholder="Ingresa tu usuario"
+            class="form-input"
+            [class.error]="username?.invalid && username?.touched"
+            autocomplete="username"
+          />
+        </div>
+        <span class="error-message" *ngIf="username?.invalid && username?.touched">
+          <span class="error-icon">⚠️</span>
+          Usuario requerido (mínimo 3 caracteres)
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="password">
+          Contraseña
+        </label>
+        <div class="input-wrapper">
+          <input 
+            id="password"
+            type="password" 
+            formControlName="password"
+            placeholder="Ingresa tu contraseña"
+            class="form-input"
+            [class.error]="password?.invalid && password?.touched"
+            autocomplete="current-password"
+          />
+        </div>
+        <span class="error-message" *ngIf="password?.invalid && password?.touched">
+          <span class="error-icon">⚠️</span>
+          Contraseña requerida (mínimo 4 caracteres)
+        </span>
+      </div>
+
+      <button 
+        type="submit" 
+        class="btn-login"
+        [disabled]="loading"
+      >
+        <span *ngIf="!loading" class="btn-content">
+          <span class="btn-text">Iniciar Sesión</span>
+        </span>
+      </button>
+    </form>
+  </div>
+
+  <div class="background-decoration">
+    <div class="circle circle-1"></div>
+    <div class="circle circle-2"></div>
+    <div class="circle circle-3"></div>
+  </div>
+</div>

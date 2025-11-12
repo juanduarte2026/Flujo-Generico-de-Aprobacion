@@ -1,13 +1,7 @@
--- =====================================================
--- Script de inicialización de base de datos
--- Sistema de Gestión de Aprobaciones
--- =====================================================
 
 -- =====================================================
 -- 1. USUARIOS DEL SISTEMA
 -- =====================================================
--- IMPORTANTE: Contraseñas en texto plano SOLO para facilitar la prueba técnica
--- En producción SIEMPRE usar BCrypt o algoritmo de hashing seguro
 
 INSERT INTO users (username, password, full_name, email, active) VALUES
 -- Solicitantes (Desarrolladores)
